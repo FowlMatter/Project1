@@ -6,10 +6,10 @@ __The files in this repository were used to configure the network depicted below
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to recreate the entire deployment pictured above. Alternatively, select portions of the Ansible Playbook file may be used to install only certain pieces of it, such as Filebeat.
 
-**The playbook used to build this Virtual Network is:
-Project1/Ansible/ELKStackFileMetricsBeat-playbook.yml
+### The playbook used to build this Virtual Network is:
+#### Project1/Ansible/ELKStackFileMetricsBeat-playbook.yml
 
-This document contains the following details:
+##### This document contains the following details:
 - Description of the Topologu
 - Access Policies
 - ELK Configuration
@@ -21,21 +21,17 @@ This document contains the following details:
 ### Description of the Topology
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
-
 Load balancing ensures that the application will be highly resilient in addition to restricting access to the network.
-
-What aspect of security do load balancers protect? What is the advantage of a jump box?
 
 > By receiving all website traffic the load balancer can evenly distribute it to multiple servers. It also prevents DoS on one or more overloaded servers by spreading the load to multiple servers. Also by maintaining the distribution point of HTTP traffic to all backpool webservers, the load balancer permits shutting down and replacing a malfunctioning server while distributing the load across the webserver network. The load balancer is another layer in the security onion blocking intrusion into the webserver VNetwork and securing network resources from outside infiltration.
 
-Similarly, the Jumpbox protects the network from security breaches by blocking all incoming ssh traffic into the Virtual Network. All containers can only be logged into on port 22 via ssh with public/private ssh-key from the jumpbox ip only. This prevents unwanted access to the Virtual network. The Jumpbox is restricted so it can communicate on the backend with the VNetwork via ssh-key on Port 22 AND on the front end with ssh, port 22 from sysadmin computer IP address and a different ssh-key. This permits sysadmin exclusive access to the jumpbox, and through it, the entire V-Network.
+> Similarly, the Jumpbox protects the network from security breaches by blocking all incoming ssh traffic into the Virtual Network. All containers can only be logged into on port 22 via ssh with public/private ssh-key from the jumpbox ip only. This prevents unwanted access to the Virtual network. The Jumpbox is restricted so it can communicate on the backend with the VNetwork via ssh-key on Port 22 AND on the front end with ssh, port 22 from sysadmin computer IP address and a different ssh-key. This permits sysadmin exclusive access to the jumpbox, and through it, the entire V-Network.
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the Metrics and system Logs.
+> Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the Metrics and system Logs.
 FileBeat monitors system logs. Referred to as  a lightweight shipper, FileBeat is one of the Elastic Beat modules available for the ELK stack. Basically a data miner for the ELK stack it forwards new log data via Logstash or Elastisearch to the ELKStack for analysis and monitoring on Kabana. By monitoring for log events, it is can harvest new content for transfer. FileBeat can be configured to monitor and track log events from remote systems across the network
 MetricBeat performs similarly to FileBeat, however it is collecting and forwarding the system metrics and statistics, the performance data, of various running services on the network servers.  Services such as Apache, MySQL and Nginx to mention a few of the many supported can have specific metrics. Metrics such as CPU usage or memory availability, network activity or dozens of supported system specific metrics can be collected and forwarded to Logstash, or directly inserted into Elastisearch.
 
-## The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
+### The configuration details of each machine may be found below.
 
 | Name     | Function | IP Address |  Operating System   |
 |----------|----------|------------|---------------------|
@@ -48,17 +44,12 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 
 ### Access Policies
 
-The machines on the internal network are not exposed to the public Internet. 
+The machines on the internal network are not exposed to the public Internet. The load balancer presents the public ip address for the 4 webservers, separating them from public HTTP traffic. The ELKStack machine can accept HTTP connections on port 9200 from outside the V-Network, access is restricted to the following IP addresses:
+ - 66.190.244.194 - sysadmin
 
-Only the ELKStack machine can accept HTTP connections. Access to this machine is restricted to the following IP addresses:
-66.190.244.194 - sysadmin
+The 5 VMs within the network can only be accessed by SSH from JumpBox 10.1.0.4. The ELKStack can recieve webserver logs and metrics data from Filebeat and Metricbeat via ssh from the 4 webservers, however the webservers and ELKStack all share the same half of the public/private ssh keypair eliminating the possibility of intranet login or access beyond what is shared by the Beats programs.  
 
-Machines within the network can only be accessed by SSH.
-- Which machine did you allow to access your ELK VM? JumpBoxProvisioner2 
-- What was its IP address?
-10.1.0.4
-
-A summary of the access policies in place can be found in the table below.
+## A summary of the access policies in place can be found in the table below.
 
 | Name     | Publicly Accessible | Allowed IP Addresses  |
 |----------|---------------------|-----------------------|
@@ -68,11 +59,10 @@ A summary of the access policies in place can be found in the table below.
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-What is the main advantage of automating configuration with Ansible?
-Reliability. By automating the configuration task the user can reproduce the same ELKStack in a few moments should the need arise. This allows rapid, replication of a replacement ELK for any reason or an additional ELK for scalability as the network demands grow.
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, there are many advantages to this strategy, starting with reliability. By automating the configuration task the user can reproduce the same ELKStack in a few moments should the need arise. This allows rapid, replication of a replacement ELK for any reason or an additional ELK for scalability as the network demands grow. Automation also greatly reduces the risk of human error being introduced into the deployment.
 
 The playbook implements the following tasks:
+
 1-First reads configuration files for specific setting reflective of this deployment.
 
 2-Downloads IO system and services, docker image and together becoming a fully provision and configured docker container.
@@ -82,22 +72,23 @@ The playbook implements the following tasks:
 4-The Ansible playbook first provisions and downloads a docker container that is configured with the necessary system resources, CPU, enough RAM etc. software, port configuration, and reconfigures the maximum memory settings to increase memory access required by an ELK machine.
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
-Project1/Ansible/Images/ELK_PS_Status.png
+/Project1/Ansible/Images/ELK_PS_StatusScreenshot.png
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
+
 The webserver group:
-DVWA-Web1 10.2.0.4
-DVWA-Web2 10.2.0.5
-DVWA-Web3 10.2.0.6
-DVWA-Web4 10.2.0.7
 
-I installed the following Beats on these machines:
-Beats services are installed on the 4 DVWA-WEB[1-4] webservers
+DVWA-Web1 10.2.0.4 - FileBeat and MetricBeat Installed
 
-FileBeats MetricBeats are installed and running and shipping logs and metrics to ELKStack.
+DVWA-Web2 10.2.0.5 - FileBeat and MetricBeat Installed
 
-These Beats allow us to collect the following information from each machine:
+DVWA-Web3 10.2.0.6 - FileBeat and MetricBeat Installed
+
+DVWA-Web4 10.2.0.7 - FileBeat and MetricBeat Installed
+
+FileBeats and MetricBeats are installed, running and shipping logs and metrics to ELKStack.
+
 FileBeats collects updates of new content from the system logs on all 4 webservers. By only sending new content it greatly reduces network load sending complete logfile uploads would create. We would expect for example updates of new content from log events of audit logs. These logs can be used to track user logon info, destination and source addresses and timestamp info to name a few. 
 
 The following logs can also provide additional resources for system monitoring; deprecation logs, gc logs, server logs, and slow logs.
@@ -129,24 +120,43 @@ http://40.83.165.244:5601/app/kibana#/home
 As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
 
 sudo ssh -i ~/.ssh/RedKey_id_rsa azdmin@137.135.46.107
+
 sudo systemctl status docker
+
 sudo systemctl start docker (if not running)
+
 sudo docker start quizzical_kowalevski
+
 sudo docker attach quizzical_kowalevski
+
 cd /etc/ansible
+
 nano ansible-playbook.yml make deployment specific edits
+
 nano hosts make deployment specific edits to intended IPs of hosts.
+
 cd ansible-cfg/roles
+
 nano filebeat-playbook.yml set hosts:webservers
+
 nano metricbeat-playbook.yml set hosts:webservers
+
 cd ../files
+
 nano filebeat-config.yml on line 1107 set hosts "10.1.0.5:9200"
+
 set line 1807 hosts: "10.1.0.5:5601"
+
 cd ../metrics
+
 nano metricbeat-config.yml set line 62 hosts: "10.1.0.5:5601"
+
 set line 94 hosts: ["10.1.0.5:9200"]
+
 cd
+
 ansible-playbook /etc/ansible/ELKStackFileMetricBeat-playbook.yml
+
 open web browser go to kabana site and verify ELKStack receiving log and metrics data.
 
 
