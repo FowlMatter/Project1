@@ -1,15 +1,12 @@
 ## Automated ELK Stack Deployment
 
-The files in this repository were used to configure the network depicted below.
+__The files in this repository were used to configure the network depicted below.__
 
-![Network Diagram](../Images/RedElkVNetworkDiagram.png)
+![Network Diagram](../Diagrams/RedElkVNetworkDiagram.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure.
-They can be used to recreate the entire deployment pictured above. Alternatively,
-select portions of the Ansible Playbook file may be used to install only certain 
-pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to recreate the entire deployment pictured above. Alternatively, select portions of the Ansible Playbook file may be used to install only certain pieces of it, such as Filebeat.
 
-The playbook used to build this Virtual Network is:
+**The playbook used to build this Virtual Network is:
 Project1/Ansible/ELKStackFileMetricsBeat-playbook.yml
 
 This document contains the following details:
@@ -34,13 +31,10 @@ What aspect of security do load balancers protect? What is the advantage of a ju
 Similarly, the Jumpbox protects the network from security breaches by blocking all incoming ssh traffic into the Virtual Network. All containers can only be logged into on port 22 via ssh with public/private ssh-key from the jumpbox ip only. This prevents unwanted access to the Virtual network. The Jumpbox is restricted so it can communicate on the backend with the VNetwork via ssh-key on Port 22 AND on the front end with ssh, port 22 from sysadmin computer IP address and a different ssh-key. This permits sysadmin exclusive access to the jumpbox, and through it, the entire V-Network.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the Metrics and system Logs.
-TODO: What does Filebeat watch for?
 FileBeat monitors system logs. Referred to as  a lightweight shipper, FileBeat is one of the Elastic Beat modules available for the ELK stack. Basically a data miner for the ELK stack it forwards new log data via Logstash or Elastisearch to the ELKStack for analysis and monitoring on Kabana. By monitoring for log events, it is can harvest new content for transfer. FileBeat can be configured to monitor and track log events from remote systems across the network
-
-TODO: What does Metricbeat record?
 MetricBeat performs similarly to FileBeat, however it is collecting and forwarding the system metrics and statistics, the performance data, of various running services on the network servers.  Services such as Apache, MySQL and Nginx to mention a few of the many supported can have specific metrics. Metrics such as CPU usage or memory availability, network activity or dozens of supported system specific metrics can be collected and forwarded to Logstash, or directly inserted into Elastisearch.
 
-The configuration details of each machine may be found below.
+## The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name     | Function | IP Address |  Operating System   |
@@ -51,18 +45,17 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 | DVWA-Web2|Webserver | 10.2.0.5   | Debian Ubuntu 18.04 |
 | DVWA-Web3|Webserver | 10.2.0.6   | Debian Ubuntu 18.04 |
 | DVWA-Web4|Webserver | 10.2.0.7   | Debian Ubuntu 18.04 |
-==========================================================
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the ELKStack machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+Only the ELKStack machine can accept HTTP connections. Access to this machine is restricted to the following IP addresses:
 66.190.244.194 - sysadmin
 
 Machines within the network can only be accessed by SSH.
 - Which machine did you allow to access your ELK VM? JumpBoxProvisioner2 
--What was its IP address?
+- What was its IP address?
 10.1.0.4
 
 A summary of the access policies in place can be found in the table below.
@@ -72,7 +65,6 @@ A summary of the access policies in place can be found in the table below.
 | Jump Box | Yes - Public IP     |    66.190.244.194     |
 |ELKStack  | Yes - Public ip     |66.190.244.194 10.1.0.4|
 |DVWA-Web* | No - Load Balancer  | 10.1.0.4 20.42.37.12  |
- ========================================================
 
 ### Elk Configuration
 
@@ -100,7 +92,7 @@ DVWA-Web2 10.2.0.5
 DVWA-Web3 10.2.0.6
 DVWA-Web4 10.2.0.7
 
-We have installed the following Beats on these machines:
+I installed the following Beats on these machines:
 Beats services are installed on the 4 DVWA-WEB[1-4] webservers
 
 FileBeats MetricBeats are installed and running and shipping logs and metrics to ELKStack.
@@ -115,15 +107,14 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 SSH into the control node and follow the steps below:
 
-Copy the YAML file ELKStackFileMetricBeat-playbook.yml Playbook  file to Ansible container Quizzical_kowalevski /etc/ansible.
+Copy the YAML file ELKStackFileMetricBeat-playbook.yml Playbook file to Ansible container Quizzical_kowalevski /etc/ansible.
 
 Update the Hosts file to include Webservers IP reflective of the deployment network IPs 10.2.0.4, 10.2.0.5, 10.2.0.6 and 10.2.0.7
 - Run the playbook, and navigate to Kabana website and verify the ELKStack is getting data to check that the installation worked as expected.
 
-Which file is the playbook? For this deployment the ansible playbook created is ELKStackFileMetricBeat-playbook.yml 
+For this deployment the ansible playbook created is ELKStackFileMetricBeat-playbook.yml 
 
-Where do you copy it?
-To run the playbook for this VNetwork, it resides on the Ansible Jumpbox, in the /etc/ansible directory
+To run the playbook for this VNetwork, it resides on the Ansible Jumpbox Container Quizzical Kowalevski, in the /etc/ansible directory
 
 Which file do you update to make Ansible run the playbook on a specific machine?
 Prior to running the playbook,the hosts file (/etc/ansible/hosts) must be modified to include the servers affected. i.e. Webservers is a group that can be defined with the IPs of the DVWA-Web1-4. ELK is another group, one defined by the ELKStack IP This is useful for deploying services to different groups rather than individual machines.
