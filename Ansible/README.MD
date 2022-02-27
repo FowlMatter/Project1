@@ -97,7 +97,7 @@ SSH into the control node and follow the steps below:
 
 Copy the YAML file ELKStackFileMetricBeat-playbook.yml Playbook file to Ansible container Quizzical_kowalevski /etc/ansible.
 
-Update the Hosts file to include Webservers IP reflective of the deployment network IPs 10.2.0.4, 10.2.0.5, 10.2.0.6 and 10.2.0.7
+Update the Hosts file to include both ELK and Webservers group IPs reflective of the deployment network IPs 10.2.0.4, 10.2.0.5, 10.2.0.6 and 10.2.0.7 then, update the ELK group to 10.1.0.5
 - Run the playbook, and navigate to Kabana website and verify the ELKStack is getting data to check that the installation worked as expected.
 
 For this deployment the ansible playbook created is ELKStackFileMetricBeat-playbook.yml 
