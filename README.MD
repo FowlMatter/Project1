@@ -39,21 +39,21 @@ hosts.txt
   #### Directory: GitHub/Project1/Ansible/Ansible-cfg/Files
 
 FileName:                                                       
-filebeat-config.yml.yml                                     
+filebeat-config.yml                                
 
 
   #### Directory: GitHub/Project1/Ansible/Ansible-cfg/metrics
 
 
 FileName:                                                        
-metricbeat-config.yml.yml                                   
+metricbeat-config.yml                                   
 
 
   #### Directory: GitHub/Project1/Ansible/Ansible-cfg/roles
 
 FileName:                                                        
-filebeat-playbook.yml.yml                                   
-metricbeat-playbook.yml.yml                                 
+filebeat-playbook.yml                                   
+metricbeat-playbook.yml                                
 
 
   #### Directory: GitHub/Project1/Ansible/DVWA
