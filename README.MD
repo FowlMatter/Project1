@@ -2,7 +2,7 @@
 
 __The files in this repository were used to configure the network depicted below.__
 
-![Network Diagram](../Diagrams/RedElkVNetworkDiagram.png)
+![Network Diagram](https://github.com/FowlMatter/Project1/blob/master/Diagrams/RedElkVNetworkDiagram.png)
 
 These files are debugged and generate a live ELK deployment on Azure. They Create the deployment pictured above. Alternatively, select portions of the Ansible Playbook file may be used to install only certain pieces of it, such as Filebeat.
 
@@ -71,7 +71,7 @@ The playbook implements the following tasks:
 3-Enables docker service.
 
 #### The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
-![PS Image](Images/ELK_PS_StatusScreenshot.png)
+![Configuration Diagram](https://github.com/FowlMatter/Project1/blob/master/Diagrams/ELK_PS_StatusScreenshot.png)
 
 #### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
