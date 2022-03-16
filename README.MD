@@ -71,7 +71,7 @@ The playbook implements the following tasks:
 3-Enables docker service.
 
 #### The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
-![Configuration Diagram](https://github.com/FowlMatter/Project1/blob/master/Diagrams/ELK_PS_StatusScreenshot.png)
+![Configuration Diagram](https://github.com/FowlMatter/Project1/blob/master/Ansible/Images/ELK_PS_StatusScreenshot.png)
 
 #### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -149,7 +149,7 @@ cd
 ansible-playbook /etc/ansible/ELKStackFileMetricBeat-playbook.yml
 
 open web browser go to kabana site and verify ELKStack receiving log and metrics data.
-
+[URLyou navigate to in order to check that the ELK server is running](http://40.83.165.244:5601/app/kibana#/home)
 
 
 
