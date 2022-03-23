@@ -25,10 +25,10 @@ Load balancing ensures that the application will be highly **resilient** in addi
 
 By providing the public IP for the webserver network, and receiving all website traffic, the load balancer can evenly distribute it to multiple servers. It also minimizes threat of DoS on one or more overloaded servers by spreading the load to multiple servers. By maintaining the distribution point of HTTP traffic to all backpool webservers, the load balancer permits shutting down and replacing a malfunctioning server or adding additional resources while distributing the load across the rest of the webserver network. The load balancer is another layer in the security onion blocking intrusion into the webserver VNetwork and securing network resources from outside infiltration.
 
-Jumpbox protects the network from security breaches by blocking all incoming ssh traffic into the Virtual Network. These containers can only be logged into via ssh with public/private ssh-key from the jumpbox ip, further preventing unwanted access to the Virtual network. Jumpbox is configured so it can communicate on the backend with the Webserver VNetwork via ssh-key on Port 22 AND on the front end with ssh, port 22 from sysadmin computer IP. By controlling access through IP address restriction and requiring a different ssh-key from sysadmin to Jumpbox than the ssh-key from Jumpbox to V-Net. The Elk server is configured similar to the webserver V-Net, however the Jumpbox/Elk backend communication utilize ssh on port 5601, the ELKStack default port. This "gateway" configuration permits sysadmin exclusive access to the jumpbox, and through it, the entire V-Net.
+The network's administration gateway is Jumpbox. Jumpbox protects the network from security breaches by blocking all incoming ssh traffic into the Virtual Network. These Docker containers can only be logged into via ssh with public/private ssh-key key-pair from the jumpbox ip, further preventing unwanted access to the Virtual network. Another layer of protection is provided as Jumpbox is configured so it can communicate on the backend with the Webserver VNetwork via ssh-key on Port 22 AND on the front end with ssh, port 22, but only from the sysadmin computer's IP. By controlling access through IP address restriction and requiring a different ssh-key from sysadmin IP to Jumpbox than the ssh-key from Jumpbox to V-Net the V-Net is hardened against IP spoofing or similar intrusion attempts. The Elk server is configured similar to the webserver V-Net, however the Jumpbox/Elk backend communication utilize ssh on port 5601, the ELKStack default port. This "gateway" configuration permits sysadmin exclusive access to the jumpbox, and through it, the entire V-Net.
 
 #### Integrating an ELK server with Beats modules allows users to easily monitor the vulnerable VMs for changes to the Metrics and System Logs.
-FileBeat monitors system logs. Referred to as  a lightweight shipper, FileBeat is one of the Elastic Beat modules available for the ELK stack. Basically a data miner for the ELK stack it forwards new log data via Logstash or Elastisearch to the ELKStack for analysis and monitoring on Kabana. By monitoring for log events, it is can harvest new content for transfer. FileBeat can be configured to monitor and track log events from remote systems across the network
+FileBeat monitors system logs. Referred to as  a lightweight shipper, FileBeat is one of the Elastic Beat modules available for the ELK stack. Basically a data miner for the ELK stack it forwards new log data via Logstash or Elastisearch to the ELKStack for analysis and monitoring on Kabana. By monitoring for log events, it can harvest new content for transfer. FileBeat can be configured to monitor and track log events from remote systems across the network
 
 MetricBeat performs similarly to FileBeat, however it is collecting and forwarding the system metrics and statistics, the performance data, of various running services on the network servers.  Services such as Apache, MySQL and Nginx to mention a few of the many supported can have specific metrics. Metrics such as CPU usage or memory availability, network activity or dozens of supported system specific metrics can be collected and forwarded to Logstash, or directly inserted into Elastisearch.
 
@@ -150,12 +150,3 @@ ansible-playbook /etc/ansible/ELKStackFileMetricBeat-playbook.yml
 
 open web browser go to kabana site and verify ELKStack receiving log and metrics data.
 [URLyou navigate to in order to check that the ELK server is running](http://40.83.165.244:5601/app/kibana#/home)
-
-
-
-
-
-
-
-
-
