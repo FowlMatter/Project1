@@ -1,1 +1,28 @@
-<mxfile host="app.diagrams.net" modified="2022-04-24T21:09:30.510Z" agent="5.0 (Windows)" version="17.4.6" etag="900ryDB_Jv1qhGAj7qsc" type="github"><diagram id="xCbqG3ZopLEsHQ0MpiIz">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-04-24T21:14:48.626Z" agent="5.0 (Windows)" etag="3Wn5AYd_m1WUjcrmwvCs" version="17.4.6" type="github">
+  <diagram id="xCbqG3ZopLEsHQ0MpiIz" name="Page-1">
+    <mxGraphModel dx="597" dy="732" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="F0cXZ-OZX3JoiU6-42a--1" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/compute/Virtual_Machine.svg;" vertex="1" parent="1">
+          <mxGeometry x="470" y="240" width="69" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="F0cXZ-OZX3JoiU6-42a--2" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/compute/Virtual_Machine.svg;" vertex="1" parent="1">
+          <mxGeometry x="401" y="110" width="69" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="F0cXZ-OZX3JoiU6-42a--3" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/compute/Virtual_Machine.svg;" vertex="1" parent="1">
+          <mxGeometry x="249" y="110" width="69" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="F0cXZ-OZX3JoiU6-42a--4" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/compute/Virtual_Machine.svg;" vertex="1" parent="1">
+          <mxGeometry x="180" y="240" width="69" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="F0cXZ-OZX3JoiU6-42a--5" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/compute/Virtual_Machine.svg;" vertex="1" parent="1">
+          <mxGeometry x="320" y="320" width="69" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="F0cXZ-OZX3JoiU6-42a--6" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/compute/Virtual_Machines_Classic.svg;" vertex="1" parent="1">
+          <mxGeometry x="50" y="400" width="69" height="64" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
